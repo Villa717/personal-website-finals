@@ -15,7 +15,7 @@ export class AppService {
 
   async getEntries() {
     const { data, error } = await this.supabase
-      .from('guestbook') // Matches your table name
+      .from('guestbook') 
       .select('*')
       .order('created_at', { ascending: false });
     
@@ -27,6 +27,17 @@ export class AppService {
     const { data, error } = await this.supabase
       .from('guestbook')
       .insert([{ name, message }]);
+    
+    if (error) throw error;
+    return data;
+  }
+
+  // New method to remove an entry
+  async deleteEntry(id: string) {
+    const { data, error } = await this.supabase
+      .from('guestbook')
+      .delete()
+      .eq('id', id); // Filters for the specific ID to delete
     
     if (error) throw error;
     return data;

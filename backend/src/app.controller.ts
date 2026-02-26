@@ -1,7 +1,7 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Delete, Param } from '@nestjs/common';
 import { AppService } from './app.service';
 
-@Controller('guestbook') // Your API will be at http://localhost:3000/guestbook
+@Controller('guestbook') 
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
@@ -13,5 +13,11 @@ export class AppController {
   @Post()
   async create(@Body() body: { name: string; message: string }) {
     return await this.appService.createEntry(body.name, body.message);
+  }
+
+  // New Delete Route
+  @Delete(':id')
+  async remove(@Param('id') id: string) {
+    return await this.appService.deleteEntry(id);
   }
 }
