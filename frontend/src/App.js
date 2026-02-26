@@ -7,7 +7,6 @@ function App() {
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
   
-  // Requirement: Live Vercel Backend URL
   const API_URL = "https://personal-website-finals-wheat.vercel.app/guestbook";
 
   const fetchEntries = async () => {
@@ -37,25 +36,26 @@ function App() {
     }
   };
 
-  // New: Function to delete an entry
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this message?")) return;
     try {
       await axios.delete(`${API_URL}/${id}`);
-      fetchEntries(); // Refresh the list
+      fetchEntries(); 
     } catch (error) {
       console.error("Error deleting entry:", error);
     }
   };
 
   return (
-    <div className="portfolio-container">
+    <div className="portfolio-container" id="home">
       <nav className="navbar">
         <div className="nav-links">
-          <span>Home</span>
-          <span>About</span>
-          <span>Projects</span>
-          <span>Guestbook</span>
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#hobbies">Hobbies</a>
+          <a href="#projects">Projects</a>
+          <a href="#guestbook">Guestbook</a>
         </div>
         <div className="theme-toggle">☀️</div>
       </nav>
@@ -65,42 +65,89 @@ function App() {
           <img src="/my-profile.jpg" alt="Andrei Antonio" className="profile-pic" />
         </div>
         <div className="hero-content">
-          <h1>Andrei Antonio</h1>
+          <h1>Andrei Antonio G. Villa</h1>
           <p className="subtitle">Computer Science Student | Asia Pacific College</p>
           <p className="bio-intro">
-            I am a second-year student specializing in **Cybersecurity and Forensics**. 
-            I am passionate about web development, IoT systems, and building clean, functional digital experiences.
+            I am a second-year student specializing in Cybersecurity and Forensics. 
+            I am currently studying about web development, IoT systems, and building clean, functional digital experiences.
           </p>
+          
           <div className="social-icons">
-             <span>Facebook</span> | <span>LinkedIn</span> | <span>Instagram</span> | <span>Email</span>
+            <a href="https://www.facebook.com/andrei.villa.39" target="_blank" rel="noopener noreferrer">Facebook</a>
+            <a href="https://www.linkedin.com/in/andrei-villa-b77513321/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://www.instagram.com/adnrzzz/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://github.com/Villa717" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="mailto:andreivilla374@gmail.com">Email</a>
           </div>
         </div>
       </section>
 
+      {/* Main Info Grid - 3 Separate Boxes */}
       <div className="info-grid">
-        <div className="card">
-          <h3>Skills & Technology</h3>
+        <div className="card" id="about">
+          <h3>Academic Profile</h3>
+          <p><strong>School:</strong> Asia Pacific College</p>
+          <p><strong>Course:</strong> BSCS-SF</p>
+          <p><strong>Section:</strong> SF241</p>
+          <p><strong>Year Level:</strong> 2nd Year Student</p>
+          <p><strong>Focus:</strong> Cybersecurity & Forensics</p>
+        </div>
+
+        <div className="card" id="skills">
+          <h3>Skills</h3>
           <div className="pill-container">
-            <span className="pill">React</span>
-            <span className="pill">Nest.js</span>
+            <span className="pill">Mysql</span>
+            <span className="pill">Javascript</span>
             <span className="pill">Supabase</span>
-            <span className="pill">Cybersecurity</span>
             <span className="pill">Arduino</span>
-            <span className="pill">IoT</span>
+            <span className="pill">MariaDB</span>
+            <span className="pill">Ubuntu</span>
+            <span className="pill">Kali Linux</span>
+            <span className="pill">Java</span>
+            <span className="pill">Python</span>
           </div>
         </div>
 
-        <div className="card">
-          <h3>Academic Profile</h3>
-          <p><strong>School:</strong> Asia Pacific College</p>
-          <p><strong>Course:</strong> BS Computer Science</p>
-          <p><strong>Year Level:</strong> 2nd Year Student</p>
-          <p><strong>Age:</strong> 20</p>
-          <p><strong>Interests:</strong> Hardware configuration, Web Dev, Physics</p>
+        <div className="card" id="hobbies">
+          <h3>Hobbies</h3>
+          <p>Passionate about exploring Physics and hardware. I also enjoy:</p>
+          <div className="pill-container">
+            <span className="pill">Running</span>
+            <span className="pill">Cycling</span>
+            <span className="pill">Watching movies</span>
+            <span className="pill">Anime/manga</span>
+            <span className="pill">Videogames</span>
+            <span className="pill">Web designing</span>
+          </div>
         </div>
       </div>
 
-      <main className="guestbook-section">
+      <section id="projects" className="projects-container">
+        <h2 className="section-title">Technical Projects</h2>
+        <div className="info-grid">
+          <div className="card">
+            <h3>Smart Plant Watering System</h3>
+            <p>An IoT system designed using Arduino and ESP32 to monitor soil moisture and automate watering.</p>
+            <div className="pill-container">
+              <span className="pill">Arduino</span>
+              <span className="pill">IoT</span>
+              <span className="pill">Sensors</span>
+            </div>
+          </div>
+
+          <div className="card">
+            <h3>React Guestbook</h3>
+            <p>A full-stack guestbook application built with React, Nest.js, and Supabase.</p>
+            <div className="pill-container">
+              <span className="pill">React</span>
+              <span className="pill">Nest.js</span>
+              <span className="pill">Supabase</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <main className="guestbook-section" id="guestbook">
         <section className="form-section">
           <h2>Leave a Message</h2>
           <form onSubmit={handleSubmit} className="guestbook-form">
@@ -117,7 +164,6 @@ function App() {
               <div key={entry.id} className="entry-card">
                 <div className="entry-header">
                   <strong>{entry.name}</strong>
-                  {/* Delete Button */}
                   <button className="delete-btn" onClick={() => handleDelete(entry.id)}>×</button>
                 </div>
                 <p>{entry.message}</p>
@@ -127,8 +173,17 @@ function App() {
           </div>
         </section>
       </main>
-    </div>
+
+{/* GUESTBOOK SECTION ENDS HERE */}
+      
+      <footer className="footer">
+        <p className="copyright">© 2026 Andrei Antonio G. Villa</p>
+        <p className="build-info">Built with React & Supabase</p>
+      </footer>
+    </div> // This is the closing tag for portfolio-container
   );
 }
 
 export default App;
+
+   
