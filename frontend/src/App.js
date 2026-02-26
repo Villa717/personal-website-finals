@@ -8,7 +8,7 @@ function App() {
   const [message, setMessage] = useState('');
   
   // Replace this with your actual Codespace Backend URL
- const API_URL = "https://miniature-yodel-g4jqqpp4jgvxf9vv9-3000.app.github.dev/guestbook";
+ const API_URL = "https://personal-website-finals-wheat.vercel.app/guestbook";
 
   // Requirement: GET method to fetch data
   const fetchEntries = async () => {
